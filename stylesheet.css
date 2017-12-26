@@ -40,7 +40,7 @@ h1 {
   margin: 0;
   font-weight: 400;
   line-height: 20px;
-  padding: 20px 2px;
+  padding: 10px 2px;
 }
 
 a {
@@ -52,12 +52,33 @@ a:hover {
   color: #101010;
 }
 
+p {
+  font-size: 15px;
+  margin: 0;
+  font-weight: 400;
+  line-height: 20px;
+  font-weight: bold;
+  color: #17171A;
+}
+
+.price {
+  font-size: 18px;
+  color: #050113;
+  padding: 5px 0px;
+}
+
+#price {
+  font-size: 18px;
+  color: #7F7E7C;
+  font-weight: bold;
+}
+
 .heading {
   background: #fff;
-  border-bottom: 1px solid #eee;
+  border-bottom: 1px solid;
   height: 60px;
   line-height: 60px;
-  padding: 0 10px;
+  padding: 15px 10px;
 }
 
 .listings {
@@ -68,12 +89,19 @@ a:hover {
 
 .listings .item {
   display: block;
-  border-bottom: 1px solid #eee;
+  border-bottom: 1px solid;
   padding: 10px;
   text-decoration: none;
 }
 
-.listings .item:last-child { border-bottom: none; }
+.listings .item .details{
+  display: block;
+  border-bottom: 1px solid #eee;
+  padding: 5px;
+  text-decoration: none;
+}
+
+.listings .item .details:last-child { border-bottom: none; }
 
 .listings .item .title {
   display: block;
@@ -85,7 +113,7 @@ a:hover {
 
 .listings .item.active .title,
 
-.listings .item .title:hover { color: #BF2414; }
+.listings .item .title:hover { color: #51525A; }
 
 .listings .item.active {
   background-color: #f8f8f8;

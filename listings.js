@@ -30,15 +30,21 @@ function buildListings(data) {
     var listing = listings.appendChild(document.createElement('div'));
     listing.className = 'item';
     listing.id = 'listing-' + i;
-    // Create a new link with the class 'title' for each store and fill it with the Listing's Name
+    // Create a new link with the class 'title' for each listing and fill it with the Listing's Title
     var link = listing.appendChild(document.createElement('a'));
     link.href = '#';
     link.className = 'title';
     link.dataPosition = i;
     link.innerHTML = prop.Title;
-    // Create a new div with the class 'details' for each project and fill it with the Descrioption
-    var details = listing.appendChild(document.createElement('div'));
-    details.innerHTML = prop.Name;
+    // Create a new div with the class 'name' for each listing and fill it with the Name
+    var name = listing.appendChild(document.createElement('div'));
+    name.className = 'details';
+    name.innerHTML = prop.Name;
+    // Create a new div with the class 'price' for each listing and fill it with the Price
+    var price = listing.appendChild(document.createElement('div'));
+    price.className = 'details';
+    price.innerHTML = prop.PricePerSF;
+    price.id = 'price';
     // Add an event listener for the links in the sidebar listing
     link.addEventListener('click', function(e) {
       // Update the currentFeature to the store associated with the clicked link
@@ -71,7 +77,8 @@ function createPopUp(currentFeature) {
 
   var popup = new mapboxgl.Popup({ closeOnClick: false })
     .setLngLat(currentFeature.geometry.coordinates)
-    .setHTML('<h3>' + currentFeature.properties.Title + '</h3><p>' + currentFeature.properties.Name + '</p>' + '<p>' + currentFeature.properties.PricePerSF + '</p>')
+    .setHTML('<img src=' + currentFeature.properties.Image + '><h3>' + currentFeature.properties.Title + '</h3><p>' + currentFeature.properties.Name +
+    '</p>' + '<p class = "price">' + currentFeature.properties.PricePerSF + '</p>')
     .addTo(map);
 }
 
@@ -120,7 +127,8 @@ map.on('mousemove', function(e) {
 
   var feature = features[0];
   popup.setLngLat(feature.geometry.coordinates)
-    .setHTML('<h3>' + feature.properties.Title + '</h3><p>' + feature.properties.Name + '</p>' + '<p>' + feature.properties.PricePerSF + '</p>')
+    .setHTML('<img src=' + feature.properties.Image + '><h3>' + feature.properties.Title + '</h3><p>' + feature.properties.Name + '</p>'
+    + '<p class = "price">' + feature.properties.PricePerSF + '</p>')
     .setLngLat(feature.geometry.coordinates)
     .addTo(map);
 });
