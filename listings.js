@@ -35,10 +35,10 @@ function buildListings(data) {
     link.href = '#';
     link.className = 'title';
     link.dataPosition = i;
-    link.innerHTML = prop.Name;
+    link.innerHTML = prop.Title;
     // Create a new div with the class 'details' for each project and fill it with the Descrioption
     var details = listing.appendChild(document.createElement('div'));
-    details.innerHTML = prop.Type;
+    details.innerHTML = prop.Name;
     // Add an event listener for the links in the sidebar listing
     link.addEventListener('click', function(e) {
       // Update the currentFeature to the store associated with the clicked link
@@ -71,7 +71,7 @@ function createPopUp(currentFeature) {
 
   var popup = new mapboxgl.Popup({ closeOnClick: false })
     .setLngLat(currentFeature.geometry.coordinates)
-    .setHTML('<h3>' + currentFeature.properties.Name + '</h3><p>' + currentFeature.properties.Type + '</p>')
+    .setHTML('<h3>' + currentFeature.properties.Title + '</h3><p>' + currentFeature.properties.Name + '</p>' + '<p>' + currentFeature.properties.PricePerSF + '</p>')
     .addTo(map);
 }
 
@@ -91,10 +91,10 @@ map.on('click', function(e) {
       activeItem[0].classList.remove('active');
     }
     // Find the index of the store.features that corresponds to the clickedPoint that fired the event listener
-    var selectedFeature = clickedPoint.properties.Name;
+    var selectedFeature = clickedPoint.properties.Title;
 
     for (var i = 0; i < features.length; i++) {
-      if (features[i].properties.Name === selectedFeature) {
+      if (features[i].properties.Title === selectedFeature) {
         selectedFeatureIndex = i;
       }
     }
@@ -117,9 +117,10 @@ map.on('mousemove', function(e) {
     popup.remove();
     return;
   }
+
   var feature = features[0];
   popup.setLngLat(feature.geometry.coordinates)
-    .setHTML('<h3>' + feature.properties.Name + '</h3><p>' + feature.properties.Type + '</p>')
+    .setHTML('<h3>' + feature.properties.Title + '</h3><p>' + feature.properties.Name + '</p>' + '<p>' + feature.properties.PricePerSF + '</p>')
     .setLngLat(feature.geometry.coordinates)
     .addTo(map);
 });
