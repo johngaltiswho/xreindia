@@ -36,6 +36,11 @@ function buildListings(data) {
     link.className = 'title';
     link.dataPosition = i;
     link.innerHTML = prop.Title;
+    // Create a new img for each listing and fill it with the Listings Image
+    var img = document.createElement("img");
+    img.src = prop.Image;
+    link.appendChild(img);
+    //document.body.appendChild(link);
     // Create a new div with the class 'name' for each listing and fill it with the Name
     var name = listing.appendChild(document.createElement('div'));
     name.className = 'details';
