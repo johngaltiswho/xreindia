@@ -25,7 +25,7 @@ function buildListings(data) {
   for (i = 0; i < data.length; i++) {
     var currentFeature = data[i];
     var prop = currentFeature.properties;
-    // Select the listing container in the HTML and append a div with the class 'item' for each store
+    // Select the listing container in the HTML and append a div with the class 'item' for each listing
     var listings = document.getElementById('listings');
     var listing = listings.appendChild(document.createElement('div'));
     listing.className = 'item';
@@ -57,7 +57,7 @@ function buildListings(data) {
       // 1. Fly to the point associated with the clicked link
       flyToProject(clickedListing);
       // 2. Close all other popups and display popup for clicked store
-      createPopUp(clickedListing);
+      //createPopUp(clickedListing);
       // 3. Highlight listing in sidebar (and remove highlight for all other listings)
       var activeItem = document.getElementsByClassName('active');
       if (activeItem[0]) {
@@ -75,7 +75,7 @@ function flyToProject(currentFeature) {
   });
 }
 
-function createPopUp(currentFeature) {
+/*function createPopUp(currentFeature) {
   var popUps = document.getElementsByClassName('mapboxgl-popup');
   // Check if there is already a popup on the map and if so, remove it
   if (popUps[0]) popUps[0].remove();
@@ -85,7 +85,7 @@ function createPopUp(currentFeature) {
     .setHTML('<img src=' + currentFeature.properties.Image + '><h3>' + currentFeature.properties.Title + '</h3><p>' + currentFeature.properties.Name +
     '</p>' + '<p class = "price">' + currentFeature.properties.PricePerSF + '</p>')
     .addTo(map);
-}
+}*/
 
 // Add an event listener for when a user clicks on the map
 map.on('click', function(e) {
@@ -96,7 +96,7 @@ map.on('click', function(e) {
     // 1. Fly to the point
     flyToProject(clickedPoint);
     // 2. Close all other popups and display popup for clicked store
-    createPopUp(clickedPoint);
+    //createPopUp(clickedPoint);
     // 3. Highlight listing in sidebar (and remove highlight for all other listings)
     var activeItem = document.getElementsByClassName('active');
     if (activeItem[0]) {

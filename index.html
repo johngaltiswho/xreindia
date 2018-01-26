@@ -6,16 +6,35 @@
   <meta name='viewport' content='initial-scale=1,maximum-scale=1,user-scalable=no' />
   <script src='https://api.tiles.mapbox.com/mapbox-gl-js/v0.31.0/mapbox-gl.js'></script>
   <link href='https://api.tiles.mapbox.com/mapbox-gl-js/v0.31.0/mapbox-gl.css' rel='stylesheet' />
+  <link rel="stylesheet" href="css/bootstrap.min.css">
+  <link rel="stylesheet" href="stylesheet.css">
 </head>
 <body>
-  <div id='map' class='map'></div>
-  <link rel="stylesheet" href="stylesheet.css">
-  <script src="listings.js"></script>
+  <header>
+    <nav id="header-nav">
+        <div class="container-fluid">
+          <div class="navbar-header">
+            <div class="navbar-brand" href="index.html">
+               <img src="https://i.imgur.com/t5Izkfo.png" class="float-left" alt="XRE Logo">
+               <p>
+                <span>Redefining The Commercial Real Estate Deal</span>
+              </p>
+            </div>
+          </div>
+        </div>
+    </nav>
+  </header>
   <div class='sidebar'>
     <div class='heading'>
       <h1>Current Listings</h1>
     </div>
-  <div id='listings' class='listings'></div>
-</div>
+    <div id='listings' class='listings'></div>
+  </div>
+  <div id=map-container>
+    <div id='map' class='map'></div>
+  </div>
+  <script src="js/jquery-3.3.1.min.js"></script>
+  <script src="js/bootstrap.min.js"></script>
+  <script src="listings.js"></script>
 </body>
 </html>
