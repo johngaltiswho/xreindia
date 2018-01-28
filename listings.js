@@ -27,26 +27,28 @@ function buildListings(data) {
     var prop = currentFeature.properties;
     // Select the listing container in the HTML and append a div with the class 'item' for each listing
     var listings = document.getElementById('listings');
-    var listing = listings.appendChild(document.createElement('div'));
+    var listing = listings.appendChild(document.createElement('article'));
     listing.className = 'item';
     listing.id = 'listing-' + i;
+    // Create a new img for each listing and fill it with the Listings Image
+    var figure = document.createElement("figure");
+    var img = document.createElement("img");
+    img.src = prop.Image;
+    listing.appendChild(figure);
+    figure.appendChild(img);
     // Create a new link with the class 'title' for each listing and fill it with the Listing's Title
-    var link = listing.appendChild(document.createElement('a'));
+    var link = listing.appendChild(document.createElement('div'));
     link.href = '#';
     link.className = 'title';
     link.dataPosition = i;
     link.innerHTML = prop.Title;
-    // Create a new img for each listing and fill it with the Listings Image
-    var img = document.createElement("img");
-    img.src = prop.Image;
-    link.appendChild(img);
     //document.body.appendChild(link);
     // Create a new div with the class 'name' for each listing and fill it with the Name
-    var name = listing.appendChild(document.createElement('div'));
+    var name = link.appendChild(document.createElement('a'));
     name.className = 'details';
     name.innerHTML = prop.Name;
     // Create a new div with the class 'price' for each listing and fill it with the Price
-    var price = listing.appendChild(document.createElement('div'));
+    var price = link.appendChild(document.createElement('a'));
     price.className = 'details';
     price.innerHTML = prop.PricePerSF;
     price.id = 'price';
@@ -75,7 +77,7 @@ function flyToProject(currentFeature) {
   });
 }
 
-/*function createPopUp(currentFeature) {
+function createPopUp(currentFeature) {
   var popUps = document.getElementsByClassName('mapboxgl-popup');
   // Check if there is already a popup on the map and if so, remove it
   if (popUps[0]) popUps[0].remove();
@@ -85,7 +87,7 @@ function flyToProject(currentFeature) {
     .setHTML('<img src=' + currentFeature.properties.Image + '><h3>' + currentFeature.properties.Title + '</h3><p>' + currentFeature.properties.Name +
     '</p>' + '<p class = "price">' + currentFeature.properties.PricePerSF + '</p>')
     .addTo(map);
-}*/
+}
 
 // Add an event listener for when a user clicks on the map
 map.on('click', function(e) {
@@ -132,8 +134,8 @@ map.on('mousemove', function(e) {
 
   var feature = features[0];
   popup.setLngLat(feature.geometry.coordinates)
-    .setHTML('<img src=' + feature.properties.Image + '><h3>' + feature.properties.Title + '</h3><p>' + feature.properties.Name + '</p>'
-    + '<p class = "price">' + feature.properties.PricePerSF + '</p>')
+    .setHTML('<figure class="pop"> <img class="pop" src=' + feature.properties.Image + '></figure><div class="popup"><h3>' + feature.properties.Title + '</h3><p>' + feature.properties.Name + '</p>'
+    + '<p class = "price">' + feature.properties.PricePerSF + '</p></div>')
     .setLngLat(feature.geometry.coordinates)
     .addTo(map);
 });
