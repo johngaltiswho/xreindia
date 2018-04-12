@@ -27,7 +27,7 @@ function buildListings(data) {
     var prop = currentFeature.properties;
     // Select the listing container in the HTML and append a div with the class 'item' for each listing
     var listings = document.getElementById('listings');
-    var listing = listings.appendChild(document.createElement('article'));
+    var listing = listings.appendChild(document.createElement('div'));
     listing.className = 'item';
     listing.id = 'listing-' + i;
     // Create a new img for each listing and fill it with the Listings Image
@@ -43,15 +43,32 @@ function buildListings(data) {
     link.dataPosition = i;
     link.innerHTML = prop.Title;
     //document.body.appendChild(link);
-    // Create a new div with the class 'name' for each listing and fill it with the Name
+    // Create a new a for each listing and fill it with the information
     var name = link.appendChild(document.createElement('a'));
     name.className = 'details';
     name.innerHTML = prop.Name;
-    // Create a new div with the class 'price' for each listing and fill it with the Price
+    name.id = 'propname';
+
+    var structure = link.appendChild(document.createElement('a'));
+    structure.className = 'details';
+    structure.innerHTML = prop.Structure;
+    structure.id = "propstruct"
+
     var price = link.appendChild(document.createElement('a'));
     price.className = 'details';
-    price.innerHTML = prop.PricePerSF;
-    price.id = 'price';
+    price.innerHTML = prop.Price;
+    price.id = 'propprice';
+
+    var sf = link.appendChild(document.createElement('a'));
+    sf.className = 'details';
+    sf.innerHTML = prop.SF;
+    sf.id = 'fontchange';
+
+    var pricesft = link.appendChild(document.createElement('a'));
+    pricesft.className = 'details';
+    pricesft.innerHTML = prop.PricePerSF;
+    pricesft.id = 'pricesft';
+
     // Add an event listener for the links in the sidebar listing
     link.addEventListener('click', function(e) {
       // Update the currentFeature to the store associated with the clicked link
@@ -82,10 +99,12 @@ function createPopUp(currentFeature) {
   // Check if there is already a popup on the map and if so, remove it
   if (popUps[0]) popUps[0].remove();
 
-  var popup = new mapboxgl.Popup({ closeOnClick: false })
-    .setLngLat(currentFeature.geometry.coordinates)
-    .setHTML('<img src=' + currentFeature.properties.Image + '><h3>' + currentFeature.properties.Title + '</h3><p>' + currentFeature.properties.Name +
-    '</p>' + '<p class = "price">' + currentFeature.properties.PricePerSF + '</p>')
+  var feature = features[0];
+  popup.setLngLat(feature.geometry.coordinates)
+    .setHTML('<figure class="pop"> <img class="pop" src=' + feature.properties.Image + '></figure><div class="popup"><h3>' + feature.properties.Title + '</h3><p id = propname>' + feature.properties.Name + '</p>'
+      +  '<p id = "propstructpopup">' + feature.properties.Structure + '</p>' + '<p id = "proppricepopup">' + feature.properties.Price + '</p>' + '<p id = "fontchangepopup">' + feature.properties.SF + '</p>'
+        + '<p id = "pricesftpopup">' + feature.properties.PricePerSF + '</p></div>')
+    .setLngLat(feature.geometry.coordinates)
     .addTo(map);
 }
 
@@ -134,8 +153,9 @@ map.on('mousemove', function(e) {
 
   var feature = features[0];
   popup.setLngLat(feature.geometry.coordinates)
-    .setHTML('<figure class="pop"> <img class="pop" src=' + feature.properties.Image + '></figure><div class="popup"><h3>' + feature.properties.Title + '</h3><p>' + feature.properties.Name + '</p>'
-    + '<p class = "price">' + feature.properties.PricePerSF + '</p></div>')
+    .setHTML('<figure class="pop"> <img class="pop" src=' + feature.properties.Image + '></figure><div class="popup"><h3>' + feature.properties.Title + '</h3><p id = propname>' + feature.properties.Name + '</p></div>'
+      +  '<div class = popup2><p id = "propstruct">' + feature.properties.Structure + '</p><p id = "propprice">' + feature.properties.Price + '</p></div><div class = popup2><p id = "fontchange">' + feature.properties.SF +
+      '</p><p id = "pricesft">' + feature.properties.PricePerSF + '</p></div>')
     .setLngLat(feature.geometry.coordinates)
     .addTo(map);
 });

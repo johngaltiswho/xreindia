@@ -94,7 +94,6 @@ img {
   top: 60px;
   height: 100%;
   z-index:-1;
-  overflow: hidden;
 }
 
 .mapboxgl-popup {
@@ -111,9 +110,11 @@ h1 {
 }
 
 h3 {
+  display: block;
+  color: #1B1514;
+  font-weight: 700;
   font-size: 16px;
   margin: 0;
-  font-weight: 400;
   line-height: 20px;
   font-weight: bold;
   border-bottom: 1px solid;
@@ -144,10 +145,44 @@ p {
   border-bottom: 1px solid;
 }
 
-#price {
-  font-size: 18px;
+#propname {
   color: #7F7E7C;
   font-weight: bold;
+  font-size: 12px;
+}
+
+#propstruct {
+  padding-top: 5px;
+  padding-right: 10px;
+  line-height: 12px;
+  font-weight: bold;
+  color: #900C3F;
+  border-right:1px solid #9D9DA1;
+  float: left;
+}
+
+#propprice {
+  padding-left: 10px;
+  font-weight: bold;
+  vertical-align: middle;
+}
+
+#fontchange {
+  padding-top: 5px;
+  font-size: 12px;
+  font-weight: bold;
+  border-right:1px solid #9D9DA1;
+  line-height: 12px;
+  float: left;
+  padding-right: 10px;
+  vertical-align: middle;
+}
+
+#pricesft {
+  padding-left: 10px;
+  font-size: 12px;
+  font-weight: bold;
+  vertical-align: middle;
 }
 
 .heading {
@@ -164,32 +199,36 @@ p {
 }
 
 .listings .item {
+  margin: 20px;
   display: block;
-  border-bottom: 1px solid;
-  overflow: hidden;
-  padding: 10px;
+  border: 1px solid #C1C0C7;
+  border-top-right-radius: 2px;
+  border-top-left-radius: 2px;
   text-decoration: none;
 }
 
 figure {
-  width: 100px;
-  height: 100px;
-  float: left;
-  padding: 5px;
+  display: inline-block;
+  position: relative;
+  margin: -1px -1px 0 -1px;
+  width: calc(100% + 2px);
+  height: auto;
 }
 
 .pop {
-  width: 70px;
-  height: 65px;
+  float: left;
+  width: 90px;
+  height: 105px;
+  object-fit: cover;
   padding-right: 20px;
 }
 
 figure > img {
   display: block;
-  height: auto;
-  width: 100px;
-  padding-right: 10px;
+  height: 250px;
+  width: calc(100% + 2px);
   position: relative;
+  object-fit: cover;
   overflow: hidden;
 }
 
@@ -197,20 +236,20 @@ figure > img {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  border-bottom: 1px solid #eee;
-  padding: 5px;
+  padding-bottom: 5px;
   text-decoration: none;
 }
 
 .listings .item .details:last-child { border-bottom: none; }
 
 .listings .item .title {
+  padding: 5px;
   display: block;
   color: #1B1514;
   font-weight: 700;
 }
 
-.title .details {
+.item .title .details {
   font-weight:400;
 }
 
@@ -228,6 +267,15 @@ figure > img {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+}
+
+.popup2 {
+  padding-top: 10px;
+  border-top: 1px;
+  border-bottom: 1px Solid;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
 }
 
 ::-webkit-scrollbar {
