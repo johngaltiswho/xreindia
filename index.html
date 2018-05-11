@@ -4,9 +4,12 @@
   <meta charset='utf-8' />
   <title>Listings</title>
   <meta name='viewport' content='initial-scale=1,maximum-scale=1,user-scalable=no' />
+  <script src="js/jquery-3.3.1.min.js"></script>
   <script src='https://api.tiles.mapbox.com/mapbox-gl-js/v0.31.0/mapbox-gl.js'></script>
   <link href='https://api.tiles.mapbox.com/mapbox-gl-js/v0.31.0/mapbox-gl.css' rel='stylesheet' />
+  <link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap-glyphicons.css" rel="stylesheet">
   <link rel="stylesheet" href="css/bootstrap.min.css">
+  <link rel="javascript" href="css/bootstrap.min.js">
   <link rel="stylesheet" href="stylesheet.css">
 </head>
 <body>
@@ -26,21 +29,11 @@
           <!--<li class="nav-item active">
             <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
           </li>-->
-          <li class="nav-item">
-            <a class="nav-link" href="#">Our Agents</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#">Buy</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#">Sell</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#">Rent</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#">New Developments</a>
-          </li>
+          <li class="nav-item"><a class="nav-link" href="#">Our Agents</a></li>
+          <li class="nav-item"><a class="nav-link" href="#">Buy</a></li>
+          <li class="nav-item"><a class="nav-link" href="#">Sell</a></li>
+          <li class="nav-item"><a class="nav-link" href="#">Rent</a></li>
+          <li class="nav-item"><a class="nav-link" href="#">New Developments</a></li>
         </ul>
       </div>
       <!--<nav class="navbar navbar-light bg-light">
@@ -51,13 +44,20 @@
           </nav>-->
     </nav>
   </header>
-  <div class="sidebar col-lg-4 col-md-4 col-sm-12 col-xs-12">
-    <!--<div class='heading'>
-      <h1>Current Listings</h1>
-    </div>-->
-    <div id='listings' class='listings'></div>
+<!--END OF HEADER SECTION & START OF MAIN SECTION-->
+  <div class = "wrapper" id = "row-main">
+    <div class="sidebar col-lg-4 col-md-4 col-sm-12 col-xs-12">
+      <div class = "actionbar">
+        <div class = "btn-group">
+          <a href="#" id="list" class="btn btn-default btn-sm"><span class="glyphicon glyphicon-th-list"></span></a>
+          <a href="#" id="grid" class="btn btn-default btn-sm"><span class="glyphicon glyphicon-th"></span></a>
+          <a href="#" id="mapClose" class="btn btn-default btn-sm"><span class="glyphicon glyphicon-map-marker"></span></a>
+        </div>
+      </div>
+      <div id='listings' class='listings'></div>
+    </div>
+    <div id='map' class="col-lg-8 d-none d-md-block"></div>
   </div>
-  <div id='map' class="col-lg-8 d-none d-md-block"></div>
   <script src="listings.js"></script>
   <script src="js/jquery-3.3.1.min.js"></script>
   <script src="js/bootstrap.min.js"></script>

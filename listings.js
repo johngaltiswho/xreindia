@@ -3,7 +3,7 @@ var map = new mapboxgl.Map({
   container: 'map',
   style: 'mapbox://styles/johngaltiswho/cjbkz1hlb2pc22spowax5iq7v',
   center: [77.5946, 12.9716 ],
-  zoom: 9
+  zoom: 2,
 });
 
 //Code in order for remove() to work in older browsers
@@ -98,7 +98,6 @@ function createPopUp(currentFeature) {
   var popUps = document.getElementsByClassName('mapboxgl-popup');
   // Check if there is already a popup on the map and if so, remove it
   if (popUps[0]) popUps[0].remove();
-
   var feature = features[0];
   popup.setLngLat(feature.geometry.coordinates)
     .setHTML('<figure class="pop"> <img class="pop" src=' + feature.properties.Image + '></figure><div class="popup"><h3>' + feature.properties.Title + '</h3><p id = propname>' + feature.properties.Name + '</p>'
@@ -158,4 +157,15 @@ map.on('mousemove', function(e) {
       '</p><p id = "pricesft">' + feature.properties.PricePerSF + '</p></div>')
     .setLngLat(feature.geometry.coordinates)
     .addTo(map);
+});
+
+//Show/hide MAP
+$(document).ready(function () {
+
+    $('#mapClose').on('click', function () {
+        $('#map').toggleClass('d-md-block');
+        $(".sidebar").toggleClass("col-lg-12 col-lg-4");
+        $(".sidebar").toggleClass("col-md-12 col-md-4");
+    });
+
 });
