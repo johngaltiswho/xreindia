@@ -20,6 +20,67 @@ map.on('load', function(e) {
   buildListings(features);
 });
 
+//CODE FOR TABLE CREATION
+
+map.on('load', function(e) {
+  var features = map.queryRenderedFeatures(e.point, { layers: ['xre-india-listings']});
+  buildListingsTable(features);
+});
+
+function buildListingsTable(data) {
+  for (i = 0; i < data.length; i++) {
+    var currentFeature = data[i];
+    var prop = currentFeature.properties;
+    // Select the tablListing container in the HTML and append a div with the class 'item' for each listing
+    var table = document.getElementById('tableListings');
+    var tableData = table.appendChild(document.createElement('tr'));
+    tableData.className = 'items';
+    tableData.id = 'tablelistings tableData-' + i;
+    // Create a new link with the class 'title' for each listing and fill it with the Listing's Title
+    var link = tableData.appendChild(document.createElement('td'));
+    link.href = '#';
+    link.className = 'title';
+    link.dataPosition = i;
+    link.innerHTML = prop.Title;
+    //document.body.appendChild(link);
+    // Create a new a for each listing and fill it with the information
+    var name = tableData.appendChild(document.createElement('td'));
+    name.className = 'name';
+    name.innerHTML = prop.Name;
+
+    var structure = tableData.appendChild(document.createElement('td'));
+    structure.className = 'structure';
+    structure.innerHTML = prop.Structure;
+
+    var price = tableData.appendChild(document.createElement('td'));
+    price.className = 'prices';
+    price.innerHTML = prop.Price;
+
+    var sf = tableData.appendChild(document.createElement('td'));
+    sf.className = 'SF';
+    sf.innerHTML = prop.SF;
+
+    var pricesft = tableData.appendChild(document.createElement('td'));
+    pricesft.className = 'pricePerSF';
+    pricesft.innerHTML = prop.PricePerSF;
+
+    link.addEventListener('click', function(e) {
+      // Update the currentFeature to the store associated with the clicked link
+      var clickedListing = data[this.dataPosition];
+      // 1. Fly to the point associated with the clicked link
+      flyToProject(clickedListing);
+      // 2. Close all other popups and display popup for clicked store
+      //createPopUp(clickedListing);
+      // 3. Highlight listing in sidebar (and remove highlight for all other listings)
+      var activeItem = document.getElementsByClassName('active');
+      if (activeItem[0]) {
+        activeItem[0].classList.remove('active');
+      }
+      this.parentNode.classList.add('active');
+    });
+  }
+}
+
 function buildListings(data) {
   // Iterate through the listings
   for (i = 0; i < data.length; i++) {
@@ -159,13 +220,36 @@ map.on('mousemove', function(e) {
     .addTo(map);
 });
 
-//Show/hide MAP
+//Toggle MAP
 $(document).ready(function () {
-
     $('#mapClose').on('click', function () {
         $('#map').toggleClass('d-md-block');
         $(".sidebar").toggleClass("col-lg-12 col-lg-4");
         $(".sidebar").toggleClass("col-md-12 col-md-4");
+        $(".listings").toggleClass("columns");
+        $(".item").toggleClass("uniformColumns");
+        $(".glyphicon-map-marker").toggleClass("activeGlyph");
     });
+});
 
+//Toggle Table View
+$(document).ready(function () {
+    $('#list').on('click', function () {
+        $('.listings').hide();
+        $('.table-container').show();
+        $(".sidebar").toggleClass("tableView");
+        $(".glyphicon-th-list").addClass("activeGlyph");
+        $(".glyphicon-th").removeClass("activeGlyph");
+    });
+});
+
+//Toggle Grid View
+$(document).ready(function () {
+    $('#grid').on('click', function () {
+        $('.table-container').hide();
+        $('.listings').show();
+        $(".sidebar").toggleClass("gridView");
+        $(".glyphicon-th").addClass("activeGlyph");
+        $(".glyphicon-th-list").removeClass("activeGlyph");
+    });
 });
