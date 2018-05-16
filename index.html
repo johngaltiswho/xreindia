@@ -4,12 +4,15 @@
   <meta charset='utf-8' />
   <title>Listings</title>
   <meta name='viewport' content='initial-scale=1,maximum-scale=1,user-scalable=no' />
+   <!-- FOR TABLE SORTER-->
   <script src="js/jquery-3.3.1.min.js"></script>
+  <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.js"></script>
   <script src='https://api.tiles.mapbox.com/mapbox-gl-js/v0.31.0/mapbox-gl.js'></script>
   <link href='https://api.tiles.mapbox.com/mapbox-gl-js/v0.31.0/mapbox-gl.css' rel='stylesheet' />
   <link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap-glyphicons.css" rel="stylesheet">
+  <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.16/css/jquery.dataTables.css">
   <link rel="stylesheet" href="css/bootstrap.min.css">
-  <link rel="javascript" href="css/bootstrap.min.js">
+  <link rel="javascript" href="js/bootstrap.min.js">
   <link rel="stylesheet" href="stylesheet.css">
 </head>
 <body>
@@ -48,28 +51,23 @@
   <div class = "wrapper" id = "row-main">
     <div class="sidebar col-lg-4 col-md-4 col-sm-12 col-xs-12">
       <div class = "actionbar">
-        <div class = "btn-group">
+        <div class = "btn-group pull-right">
           <a href="#" id="list" class="btn btn-default btn-sm"><span class="glyphicon glyphicon-th-list"></span></a>
           <a href="#" id="grid" class="btn btn-default btn-sm"><span class="glyphicon glyphicon-th"></span></a>
-          <a href="#" id="mapClose" class="btn btn-default btn-sm pull-right"><span class="glyphicon glyphicon-map-marker"></span></a>
+          <a href="#" id="mapClose" class="btn btn-default btn-sm"><span class="glyphicon glyphicon-map-marker"></span></a>
         </div>
       </div>
       <div id='listings' class='listings'></div>
       <div class='table-container'>
-        <table id='tableListings' >
-          <th>Title</th>
-          <th>Name</th>
-          <th>Structure</th>
-          <th>Price</th>
-          <th>SF</th>
-          <th>Price/SF</th>
-        </table>
+        <table class="display" id="listingsTable"></table>
       </div>
     </div>
     <div id='map' class="col-lg-8 d-none d-md-block"></div>
+      <div class = "btn-group pull-right">
+        <a href="#" id="remove" class="btn btn-default btn-sm"><span class="glyphicon glyphicon glyphicon-remove"></span></a>
+      </div>
   </div>
   <script src="listings.js"></script>
-  <script src="js/jquery-3.3.1.min.js"></script>
   <script src="js/bootstrap.min.js"></script>
 </body>
 </html>

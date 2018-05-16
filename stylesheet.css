@@ -74,6 +74,7 @@ img {
 .wrapper {
   display: flex;
   align-items: stretch;
+  overflow: hidden;
 }
 
 #row-main {
@@ -128,8 +129,14 @@ img {
 }
 
 #mapClose {
-  right: 0px;
-  float: right;
+  margin-left: 10px;
+}
+
+#remove {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  display: none;
 }
 
 .glyphicon::before {
@@ -153,7 +160,7 @@ img {
   overflow: scroll;
 }
 
-#tableListings {
+#listingsTable {
   width: 100%;
   white-space: nowrap;
 }
@@ -185,6 +192,20 @@ td, th {
 
 tr:nth-child(even) {
     background-color: #dddddd;
+}
+
+.dataTables_wrapper {
+  margin-top: 10px;
+}
+
+label {
+    display: inline-block;
+    margin-bottom: 10px;
+}
+
+.dataTables_wrapper .dataTables_paginate .paginate_button:hover {
+    color: #0B0B0B !important;
+    background: #CACED2;
 }
 
 /*GRID VIEW LISTINGS*/
@@ -381,10 +402,12 @@ p {
 
 /*MAP*/
 #map {
+  display: block;
   position: absolute;
   left: 33.3333%;
   width: 66.6666%;
   height: 100%;
+  overflow: hidden;
 }
 
 .mapboxgl-popup {
@@ -408,7 +431,7 @@ p {
 }
 
 ::-webkit-scrollbar {
-  width: 3px;
+  width: 5px;
   height: 3px;
   border-left: 0;
   background: rgba(0, 0, 0, 0.1);
@@ -530,7 +553,19 @@ p {
     max-width: calc(99.9% * 1/2 - (30px - 30px * 12));
   }
 
+  .maptoggle {
+    position: absolute;
+    width: 100% !important;
+    left: 0% !important;
+    height: 100%;
+  }
 
+  #remove {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    display: none;
+  }
 }
 /********** Extra Extra small devices only **********/
 @media (max-width: 575px) {
@@ -539,5 +574,19 @@ p {
     width: calc(99.9% - (30px - 30px));
     flex-basis: calc(99.9% - (30px - 30px));
     max-width: calc(99.9%  - (30px - 30px));
+  }
+
+  .maptoggle {
+    position: absolute;
+    width: 100% !important;
+    left: 0% !important;
+    height: 100%;
+  }
+
+  #remove {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    display: none;
   }
 }

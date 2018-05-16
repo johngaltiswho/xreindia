@@ -28,57 +28,46 @@ map.on('load', function(e) {
 });
 
 function buildListingsTable(data) {
-  for (i = 0; i < data.length; i++) {
+  var tableData = [];
+  var rowid = [];
+  for (var i = 0; i < data.length; i++) {
     var currentFeature = data[i];
+    rowid[i] = i;
+    tableData[i] = [];
     var prop = currentFeature.properties;
-    // Select the tablListing container in the HTML and append a div with the class 'item' for each listing
-    var table = document.getElementById('tableListings');
-    var tableData = table.appendChild(document.createElement('tr'));
-    tableData.className = 'items';
-    tableData.id = 'tablelistings tableData-' + i;
-    // Create a new link with the class 'title' for each listing and fill it with the Listing's Title
-    var link = tableData.appendChild(document.createElement('td'));
-    link.href = '#';
-    link.className = 'title';
-    link.dataPosition = i;
-    link.innerHTML = prop.Title;
-    //document.body.appendChild(link);
-    // Create a new a for each listing and fill it with the information
-    var name = tableData.appendChild(document.createElement('td'));
-    name.className = 'name';
-    name.innerHTML = prop.Name;
-
-    var structure = tableData.appendChild(document.createElement('td'));
-    structure.className = 'structure';
-    structure.innerHTML = prop.Structure;
-
-    var price = tableData.appendChild(document.createElement('td'));
-    price.className = 'prices';
-    price.innerHTML = prop.Price;
-
-    var sf = tableData.appendChild(document.createElement('td'));
-    sf.className = 'SF';
-    sf.innerHTML = prop.SF;
-
-    var pricesft = tableData.appendChild(document.createElement('td'));
-    pricesft.className = 'pricePerSF';
-    pricesft.innerHTML = prop.PricePerSF;
-
-    link.addEventListener('click', function(e) {
-      // Update the currentFeature to the store associated with the clicked link
-      var clickedListing = data[this.dataPosition];
-      // 1. Fly to the point associated with the clicked link
-      flyToProject(clickedListing);
-      // 2. Close all other popups and display popup for clicked store
-      //createPopUp(clickedListing);
-      // 3. Highlight listing in sidebar (and remove highlight for all other listings)
-      var activeItem = document.getElementsByClassName('active');
-      if (activeItem[0]) {
-        activeItem[0].classList.remove('active');
-      }
-      this.parentNode.classList.add('active');
-    });
+    var inf = [rowid[i], prop.Title, prop.Name, prop.Structure, prop.Price, prop.SF, prop.PricePerSF];
+    for (var j = 0; j < inf.length; j++) {
+      tableData[i][j] = inf[j];
+    }
   }
+
+  $(document).ready( function () {
+      $('#listingsTable').DataTable({
+        "columnDefs": [
+            {
+                "targets": [ 0 ],
+                "visible": false,
+                "searchable": false
+            },
+          ],
+        "bAutoWidth": false,
+        "bPaginate": false,
+        data: tableData,
+        columns: [
+          {title: "Rowid"},
+          {title: "Title"},
+          {title: "Name"},
+          {title: "Structure"},
+          {title: "Price",
+        "defaultContent": ""},
+          {title: "SF"},
+          {title: "Price/SF"}
+        ],
+        "fnCreatedRow": function( nRow, aData, iDataIndex ) {
+          $(nRow).attr('id', aData[0]);
+        },
+      });
+    });
 }
 
 function buildListings(data) {
@@ -223,14 +212,48 @@ map.on('mousemove', function(e) {
 //Toggle MAP
 $(document).ready(function () {
     $('#mapClose').on('click', function () {
+      if (window.matchMedia('(max-width: 767px)').matches) {
+        $('#map').toggleClass("d-block d-none");
+        $('#map').toggleClass("maptoggle");
+        $(".sidebar").hide();
+        $("#remove").show();
+      } else {
         $('#map').toggleClass('d-md-block');
         $(".sidebar").toggleClass("col-lg-12 col-lg-4");
         $(".sidebar").toggleClass("col-md-12 col-md-4");
         $(".listings").toggleClass("columns");
         $(".item").toggleClass("uniformColumns");
         $(".glyphicon-map-marker").toggleClass("activeGlyph");
+      }
     });
 });
+
+//Toggle Table View in Small Screen
+$(document).ready(function () {
+    $('#remove').on('click', function () {
+      $('#map').toggleClass("d-block d-none");
+      $('#map').toggleClass("maptoggle");
+      $(".sidebar").show();
+      $("#remove").hide();
+    });
+});
+
+function showSidebar(x) {
+    if (x.matches) { // If media query matches
+        $(".sidebar").show();
+        $('#map').removeClass('maptoggle');
+        $('#map').removeClass('d-block');
+        $('#map').addClass('d-none');
+    }
+}
+
+//Show sidebar when screen resizes
+var x = window.matchMedia("(min-width: 768px)")
+showSidebar(x); // Call listener function at run time
+x.addListener(showSidebar) // Attach listener function on state changes
+if (window.matchMedia('(min-width: 768px)').matches) {
+  $(".sidebar").show()
+}
 
 //Toggle Table View
 $(document).ready(function () {
